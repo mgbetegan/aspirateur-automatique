@@ -1,7 +1,7 @@
 
 .grid-container {
   display: grid;
-  gap: 0px; /* Espacement entre les divs */
+  gap: 0px;
 }
 
 .grid-row {
