@@ -1,5 +1,5 @@
 <div class="container-fluid bg-gradient">
-  <div class="row justify-content-center">
+  <div class="row">
     <div class="col-md-7 col-sm-12 ">
       <form [formGroup]="aspiratorCommandForm" (ngSubmit)="onSubmitForm()">
 
@@ -34,7 +34,8 @@
           <div class="form-group col-md-6 col-sm-12">
             <label class="ml-2"> Orientation * </label>
             <div class="">
-              <input type="text" formControlName="aspiratorInitialOrientation" class="form-control" placeholder="Exemple: N"
+              <input type="text" formControlName="aspiratorInitialOrientation" class="form-control"
+                     placeholder="Exemple: N"
                      [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('aspiratorInitialOrientation')?.invalid, 'is-valid': !aspiratorCommandForm.get('aspiratorInitialOrientation')?.invalid}"
               >
               <div *ngIf="aspiratorCommandF" class="invalid-feedback">
@@ -85,7 +86,7 @@
               <input type="text" formControlName="instructions" class="form-control" placeholder="Exemple : DGGA"
                      [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('instructions')?.invalid, 'is-valid': !aspiratorCommandForm.get('instructions')?.invalid}"
               >
-              <div *ngIf="aspiratorCommandF" class="invalid-feedback" >
+              <div *ngIf="aspiratorCommandF" class="invalid-feedback">
                 <div *ngIf="submitted && aspiratorCommandForm.get('instructions')?.invalid" class="text-start">
                   Ce champs est requis! Il doit contenir au moins un des caractères D,G ou A.
                 </div>
@@ -100,12 +101,27 @@
 
         <div class="form-group col-md-6 col-sm-6 px-5 py-2">
           <p>* Champs Obligatoire </p>
-          <p  *ngIf="finalPosition != ''" > <strong>La position finale de l'aspirateur est : {{finalPosition}} </strong></p>
+          <p *ngIf="finalPosition != ''"><strong>La position finale de l'aspirateur est : {{finalPosition}} </strong>
+          </p>
 
         </div>
       </form>
-     </div>
+    </div>
+    <div class="col-md-5 col-sm-12">
 
+      <div class="grid-container">
+        <ng-container *ngFor="let row of grid.rows; index as i">
+          <div class="grid-row" >
+            <div
+              *ngFor="let column of grid.columns; index as j"
+              class="grid-item"
+              [class.active]="aspiratorIsHere(j, i)"
+            >{{j}} {{i}}</div>
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
   </div>
 </div>
 

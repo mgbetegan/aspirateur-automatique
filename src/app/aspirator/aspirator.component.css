@@ -1,0 +1,18 @@
+
+.grid-container {
+  display: grid;
+  gap: 0px; /* Espacement entre les divs */
+}
+
+.grid-row {
+  display: grid;
+
+}
+
+.grid-item {
+  border: 1px solid black;
+  padding: 10px;
+}
+.grid-item.active {
+  background-color: rebeccapurple;
+}
