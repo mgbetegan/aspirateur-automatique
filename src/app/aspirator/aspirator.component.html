@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-7 col-sm-12 ">
+      <form [formGroup]="aspiratorCommandForm" (ngSubmit)="onSubmitForm()">
+
+        <div class="row mt-3 p-5">
+          <h4>L'aspirateur : position initiale</h4>
+          <div class="form-group col-md-6 col-sm-12 ">
+            <label class="ml-2"> X * </label>
+            <div class="">
+              <input type="text" formControlName="aspiratorInitialX" class="form-control"
+                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('RequestNumFolder')?.invalid, 'is-valid': !aspiratorCommandForm.get('RequestNumFolder')?.invalid}"
+              >
+              <div *ngIf="aspiratorCommandF" class="invalid-feedback">
+                <div *ngIf="submitted && aspiratorCommandForm.get('RequestNumFolder')?.invalid" class="text-start">
+                  Ce champs est requis!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="ml-2"> Y * </label>
+            <div class="">
+              <input type="text" formControlName="aspiratorInitialY" class="form-control"
+                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('aspiratorInitialY')?.invalid, 'is-valid': !aspiratorCommandForm.get('aspiratorInitialY')?.invalid}"
+              >
+              <div *ngIf="aspiratorCommandF" class="invalid-feedback">
+                <div *ngIf="submitted && aspiratorCommandForm.get('aspiratorInitialY')?.invalid" class="text-start">
+                  Ce champs est requis!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="ml-2"> Orientation * </label>
+            <div class="">
+              <input type="text" formControlName="aspiratorInitialOrientation" class="form-control" placeholder="Exemple: N"
+                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('aspiratorInitialOrientation')?.invalid, 'is-valid': !aspiratorCommandForm.get('aspiratorInitialOrientation')?.invalid}"
+              >
+              <div *ngIf="aspiratorCommandF" class="invalid-feedback">
+                <div *ngIf="submitted && aspiratorCommandForm.get('aspiratorInitialOrientation')?.invalid"
+                     class="text-start">
+                  Ce champs est requis! Il doit contenir au maximum un des caractères N, S, E, W.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row p-5">
+          <h4>La Grille : dimensions</h4>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="ml-2"> Nombre de colonnes * </label>
+            <div class="">
+              <input type="text" formControlName="maxGridColumns" class="form-control"
+                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('maxGridColumns')?.invalid, 'is-valid': !aspiratorCommandForm.get('maxGridColumns')?.invalid}"
+              >
+              <div *ngIf="aspiratorCommandF" class="invalid-feedback">
+                <div *ngIf="submitted && aspiratorCommandForm.get('maxGridColumns')?.invalid" class="text-start">
+                  Ce champs est requis!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="ml-2"> Nombre de lignes * </label>
+            <div class="">
+              <input type="text" formControlName="maxGridRows" class="form-control"
+                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('maxGridRows')?.invalid, 'is-valid': !aspiratorCommandForm.get('maxGridRows')?.invalid}"
+              >
+              <div *ngIf="aspiratorCommandF" class="invalid-feedback">
+                <div *ngIf="submitted && aspiratorCommandForm.get('maxGridRows')?.invalid" class="text-start">
+                  Ce champs est requis!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row px-5">
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="ml-2"> Instruction * </label>
+            <div class="">
+              <input type="text" formControlName="instructions" class="form-control" placeholder="Exemple : DGGA"
+                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('instructions')?.invalid, 'is-valid': !aspiratorCommandForm.get('instructions')?.invalid}"
+              >
+              <div *ngIf="aspiratorCommandF" class="invalid-feedback" >
+                <div *ngIf="submitted && aspiratorCommandForm.get('instructions')?.invalid" class="text-start">
+                  Ce champs est requis! Il doit contenir au moins un des caractères D,G ou A.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6 col-sm-16">
+
+            <button type="submit" class="btn btn-md btn-primary">Exécuter l'instruction</button>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 col-sm-6 px-5 py-2">
+          <p>* Champs Obligatoire </p>
+          <p  *ngIf="finalPosition != ''" > <strong>La position finale de l'aspirateur est : {{finalPosition}} </strong></p>
+
+        </div>
+      </form>
+     </div>
+
+  </div>
+</div>
+
+
