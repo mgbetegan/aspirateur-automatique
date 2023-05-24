@@ -1,4 +1,13 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-body{
-  background-color:lavender;
+body {
+  min-height: 100vh;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+.form-control:focus {
+  box-shadow: none;
 }

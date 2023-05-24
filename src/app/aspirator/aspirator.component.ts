@@ -1,4 +1,4 @@
-import {Component, OnInit,Renderer2} from '@angular/core';
+import {AfterViewChecked, Component, OnInit, Renderer2} from '@angular/core';
 import {AspiratorPosition} from "../../interfaces/aspirator-position.interface";
 import {GridLayout} from "../../interfaces/grid-layout.interface";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -12,15 +12,20 @@ const cardinalPoints: string[] = ['N', 'E', 'S', 'W'];
 })
 
 export class AspiratorComponent implements OnInit {
-  // @ts-ignore
   aspirator: AspiratorPosition = {x: 0, y: 0, orientation: 'N'};
 
-  // @ts-ignore
   grid: GridLayout = {rows: [], columns: []};
   maxGridRows: number = 0;
   maxGridColumns: number = 0;
   instructions: string = '';
-  aspiratorCommandForm !: FormGroup;
+  aspiratorCommandForm : FormGroup = this.formBuilder.group({
+    maxGridRows: [null, [Validators.required]],
+    maxGridColumns: [null, [Validators.required]],
+    aspiratorInitialX: [null, [Validators.required]],
+    aspiratorInitialY: [null, [Validators.required]],
+    aspiratorInitialOrientation: ['', [Validators.required, Validators.pattern(/^[NSEW]+$/), Validators.maxLength(1)]],
+    instructions: ['', [Validators.required, Validators.pattern(/^[DGA]+$/)]],
+  });
   submitted: boolean = false;
   finalPosition: string = '';
 
@@ -28,15 +33,9 @@ export class AspiratorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.aspiratorCommandForm = this.formBuilder.group({
-      maxGridRows: [null, [Validators.required]],
-      maxGridColumns: [null, [Validators.required]],
-      aspiratorInitialX: [null, [Validators.required]],
-      aspiratorInitialY: [null, [Validators.required]],
-      aspiratorInitialOrientation: ['', [Validators.required, Validators.pattern(/^[NSEW]+$/), Validators.maxLength(1)]],
-      instructions: ['', [Validators.required, Validators.pattern(/^[DGA]+$/)]],
-    })
+    //this.aspiratorCommandForm =
   }
+
 
   /**
    * use to turn aspirator to Left
@@ -102,10 +101,10 @@ export class AspiratorComponent implements OnInit {
   }
 
   private initializeGrid() {
-
     this.grid.columns = Array.from({length: this.maxGridColumns}, (_, index) => index);
     this.grid.rows = Array.from({length: this.maxGridRows}, (_, index) => index);
-    this.setGridStyles();
+    //this.setGridStyles();
+
   }
 
   private setAspiratorPosition(x: number, y: number, orientation: string) {
@@ -152,15 +151,16 @@ export class AspiratorComponent implements OnInit {
   }
 
   aspiratorIsHere(x: number, y: number): boolean {
-    return this.aspirator.x === x && this.aspirator.y === y;
+    return this.aspirator.x === y && this.aspirator.y === x;
   }
 
-  setGridStyles(): void {
-    const gridColumns:string = `repeat(${this.grid.columns.length}, 1fr)`;
-    const gridRows:string = `repeat(${this.grid.rows.length}, 1fr)`;
 
-    this.renderer.setStyle(document.querySelector('.grid-container'), 'grid-template-columns', gridColumns);
-    this.renderer.setStyle(document.querySelector('.grid-container'), 'grid-template-rows', gridRows);
-    this.renderer.setStyle(document.querySelector('.grid-row '), 'grid-template-columns', gridRows);
+  get getGridTemplateColumns() {
+    return `repeat(${this.grid.columns.length}, 1fr)`;
+  }
+
+  get getGridTemplateRows() {
+    const numRows = this.grid.rows.length;
+    return `repeat(${this.grid.rows.length}, 1fr)`;
   }
 }
