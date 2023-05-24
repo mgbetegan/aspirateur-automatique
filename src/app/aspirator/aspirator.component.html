@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid bg-gradient">
   <div class="row justify-content-center">
     <div class="col-md-7 col-sm-12 ">
       <form [formGroup]="aspiratorCommandForm" (ngSubmit)="onSubmitForm()">
@@ -8,11 +8,11 @@
           <div class="form-group col-md-6 col-sm-12 ">
             <label class="ml-2"> X * </label>
             <div class="">
-              <input type="text" formControlName="aspiratorInitialX" class="form-control"
-                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('RequestNumFolder')?.invalid, 'is-valid': !aspiratorCommandForm.get('RequestNumFolder')?.invalid}"
+              <input type="number" formControlName="aspiratorInitialX" class="form-control"
+                     [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('aspiratorInitialX')?.invalid, 'is-valid': !aspiratorCommandForm.get('aspiratorInitialX')?.invalid}"
               >
               <div *ngIf="aspiratorCommandF" class="invalid-feedback">
-                <div *ngIf="submitted && aspiratorCommandForm.get('RequestNumFolder')?.invalid" class="text-start">
+                <div *ngIf="submitted && aspiratorCommandForm.get('aspiratorInitialX')?.invalid" class="text-start">
                   Ce champs est requis!
                 </div>
               </div>
@@ -21,7 +21,7 @@
           <div class="form-group col-md-6 col-sm-12">
             <label class="ml-2"> Y * </label>
             <div class="">
-              <input type="text" formControlName="aspiratorInitialY" class="form-control"
+              <input type="number" formControlName="aspiratorInitialY" class="form-control"
                      [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('aspiratorInitialY')?.invalid, 'is-valid': !aspiratorCommandForm.get('aspiratorInitialY')?.invalid}"
               >
               <div *ngIf="aspiratorCommandF" class="invalid-feedback">
@@ -53,7 +53,7 @@
           <div class="form-group col-md-6 col-sm-12">
             <label class="ml-2"> Nombre de colonnes * </label>
             <div class="">
-              <input type="text" formControlName="maxGridColumns" class="form-control"
+              <input type="number" formControlName="maxGridColumns" class="form-control"
                      [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('maxGridColumns')?.invalid, 'is-valid': !aspiratorCommandForm.get('maxGridColumns')?.invalid}"
               >
               <div *ngIf="aspiratorCommandF" class="invalid-feedback">
@@ -66,7 +66,7 @@
           <div class="form-group col-md-6 col-sm-12">
             <label class="ml-2"> Nombre de lignes * </label>
             <div class="">
-              <input type="text" formControlName="maxGridRows" class="form-control"
+              <input type="number" formControlName="maxGridRows" class="form-control"
                      [class]="{ 'is-invalid': submitted && aspiratorCommandForm.get('maxGridRows')?.invalid, 'is-valid': !aspiratorCommandForm.get('maxGridRows')?.invalid}"
               >
               <div *ngIf="aspiratorCommandF" class="invalid-feedback">

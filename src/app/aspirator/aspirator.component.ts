@@ -26,10 +26,10 @@ export class AspiratorComponent implements  OnInit{
 
   ngOnInit() {
     this.aspiratorCommandForm = this.formBuilder.group({
-      maxGridRows: [0,[Validators.required]],
-      maxGridColumns: [0,[Validators.required]],
-      aspiratorInitialX:[0, [Validators.required]],
-      aspiratorInitialY:[0, [Validators.required]],
+      maxGridRows: [null,[Validators.required]],
+      maxGridColumns: [null,[Validators.required]],
+      aspiratorInitialX:[null, [Validators.required]],
+      aspiratorInitialY:[null, [Validators.required]],
       aspiratorInitialOrientation:['', [Validators.required,Validators.pattern(/^[NSEW]+$/),Validators.maxLength(1)]],
       instructions:['', [Validators.required, Validators.pattern(/^[DGA]+$/)]],
     })
